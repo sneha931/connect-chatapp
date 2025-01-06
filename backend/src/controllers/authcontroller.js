@@ -1,8 +1,11 @@
-const User =require("../modules/usermodel")
-const bcrypt=require("bcryptjs")
-const generatetoken=require("../lib/utils")
-const cloudinary=require("../lib/cloudinary")
-const signup=async(req,res)=>{
+import  User from "../modules/usermodel"
+import { generateToken } from "../lib/utils.js";
+import bcrypt from "bcryptjs";
+import cloudinary from "../lib/cloudinary.js";
+
+
+
+export const signup=async(req,res)=>{
     const {email,fullName,password}=req.body;
     try{
         if(!fullName|| !email || !password){
@@ -40,7 +43,7 @@ const signup=async(req,res)=>{
        res.status(500).json({message:"Internal Server error"});
     }
 };
-const login=async(req,res)=>{
+export const login=async(req,res)=>{
     const {email,password}=req.body
     try{
      const user=await User.findOne({email});
@@ -65,7 +68,7 @@ const login=async(req,res)=>{
         res.status(500).json({message:"Internal server error"})
     }
 };
-const logout=async(req,res)=>{
+export const logout=async(req,res)=>{
     try{
         res.cookie("jwt","",{maxAge:0})
         res.status(200).json({message:"Logged out"})
@@ -75,7 +78,7 @@ const logout=async(req,res)=>{
         res.status(500).json({message:"Internal server error"});
     }
 };
-const updateprofile=async(req,res)=>{
+export const updateprofile=async(req,res)=>{
    try{
     const {profilepic}=req.body;
     const userId=req.user._id;
@@ -91,7 +94,7 @@ const updateprofile=async(req,res)=>{
      res.status(500).json({message:"Internal server error"})
    }
 }
-const checkAuth=async(req,res)=>{
+export const checkAuth=async(req,res)=>{
     try{
         res.status(200).json(req.user);
     }
@@ -101,4 +104,4 @@ const checkAuth=async(req,res)=>{
     }
 }
 
-module.exports={signup,login,logout,updateprofile,checkAuth};
+
