@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const connectDB=async()=>{
+export const connectDB=async()=>{
     try{
         await mongoose.connect(process.env.MONGODB_URI,{
             useNewUrlParser: true,
@@ -11,4 +11,4 @@ const connectDB=async()=>{
         console.log("database not connected",error);
     }
 }
-export default connectDB;
+
