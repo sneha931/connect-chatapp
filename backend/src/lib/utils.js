@@ -1,5 +1,5 @@
-const jwt=require('jsonwebtoken')
-const generatetoken=(userId,res)=>{
+import jwt from "jsonwebtoken";
+export const generatetoken=(userId,res)=>{
   const token=jwt.sign({userId},process.env.JWT_SECRET,{
     expiresIn:"7d"
   })
@@ -12,4 +12,3 @@ const generatetoken=(userId,res)=>{
   console.log("Token successfully generated and cookie set");
     return { success: true, token };
 }
-module.exports=generatetoken;
