@@ -3,7 +3,7 @@ import {axiosInstance} from "../lib/axios"
 import {toast} from "react-hot-toast"
 import {io} from "socket.io-client"
 
-const baseurl=import.meta.env.MODE === "development"?"http://localhost:8000":"/api";
+const baseurl=import.meta.env.MODE === "development"?"http://localhost:8000":"https://connect-chatapp-pb6c.onrender.com/api";
 
 export const useAuthStore=create((set,get)=>({
     authUser:null,
