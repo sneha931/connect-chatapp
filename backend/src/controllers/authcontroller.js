@@ -65,7 +65,7 @@ export const login=async(req,res)=>{
     }
     catch(err){
         console.log("Error in login controller",err.message);
-        res.status(500).json({message:"Internal server error"})
+        res.status(500).json({message:"Internal server error",error:err.message})
     }
 };
 export const logout=async(req,res)=>{
