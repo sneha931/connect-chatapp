@@ -1,9 +1,9 @@
-const User = require("../modules/usermodel");
-const Message = require("../modules/messagemodel");
-const cloudinary = require("cloudinary");
-const { getReceiverSocketId,io} = require("../lib/socket");
+import User from "../modules/usermodel";
+import Message from "../modules/messagemodel";
+import cloudinary from "cloudinary";
+import  { getReceiverSocketId,io} from "../lib/socket";
 
-const getUsersforSidebar = async (req, res) => {
+export const getUsersforSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
     const filterAndUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
@@ -14,7 +14,7 @@ const getUsersforSidebar = async (req, res) => {
   }
 };
 
-const getMessages = async (req, res) => {
+export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const senderId = req.user._id;
@@ -31,7 +31,7 @@ const getMessages = async (req, res) => {
   }
 };
 
-const sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
@@ -51,7 +51,7 @@ const sendMessage = async (req, res) => {
     });
 
     await newMessage.save();
-   const receiverSocketId=getReceiverSocketId(receiverId);
+ const receiverSocketId=getReceiverSocketId(receiverId);
    if(receiverSocketId){
     try {
       io.to(receiverSocketId).emit("newMessage", newMessage);
@@ -68,4 +68,4 @@ const sendMessage = async (req, res) => {
   }
 };
 
-module.exports = { getUsersforSidebar, getMessages, sendMessage };
+
