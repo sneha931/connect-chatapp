@@ -1,4 +1,4 @@
-const mongoose=require('mongoose')
+import mongoose from "mongoose";
 
 const userschema=new mongoose.Schema({
     email:{
@@ -22,4 +22,4 @@ const userschema=new mongoose.Schema({
 },{timestamps:true})
 
 const User=mongoose.model("User",userschema);
-module.exports=User;
+export default User;
