@@ -24,7 +24,7 @@ export const signup=async(req,res)=>{
             password:hashedpassword
         })
         if(newuser){
-            generatetoken(newuser._id,res)
+            generateToken(newuser._id,res)
             await newuser.save();
 
             res.status(201).json({
@@ -55,7 +55,7 @@ export const login=async(req,res)=>{
      if(!ispassword){
         return res.status(400).json({message:"Invalid password"});
      }
-     generatetoken(user._id,res)
+     generateToken(user._id,res)
 
      res.status(200).json({_id:user._id,
         fullName:user.fullName,
